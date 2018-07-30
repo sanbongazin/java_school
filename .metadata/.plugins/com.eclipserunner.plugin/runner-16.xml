@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<runner version="1.0.0">
+    <category expanded="true" name="カテゴリーなし">
+        <launchConfiguration bookmark="false" defaultLaunchMode="run" name="Calculaterectangle"/>
+        <launchConfiguration bookmark="false" defaultLaunchMode="run" name="CaluclationCircle"/>
+        <launchConfiguration bookmark="false" defaultLaunchMode="run" name="CaluculationCircle"/>
+        <launchConfiguration bookmark="false" defaultLaunchMode="run" name="Haneki"/>
+        <launchConfiguration bookmark="false" defaultLaunchMode="run" name="JinsokuToByosoku"/>
+        <launchConfiguration bookmark="false" defaultLaunchMode="run" name="MyCircle3"/>
+        <launchConfiguration bookmark="false" defaultLaunchMode="run" name="Yamamoto1st"/>
+        <launchConfiguration bookmark="false" defaultLaunchMode="run" name="Yamamoto2nd"/>
+        <launchConfiguration bookmark="false" defaultLaunchMode="run" name="Yamamto3rd"/>
+        <launchConfiguration bookmark="false" defaultLaunchMode="run" name="reteral"/>
+        <launchConfiguration bookmark="false" defaultLaunchMode="run" name="speed"/>
+    </category>
+</runner>

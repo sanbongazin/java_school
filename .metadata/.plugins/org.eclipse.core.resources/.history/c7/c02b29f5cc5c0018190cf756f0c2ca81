@@ -1,0 +1,16 @@
+
+public class MyBallTest {
+
+	public static void main(String[] args) {
+		// TODO 自動生成されたメソッド・スタブ
+
+
+		ball1.showBangou();
+
+		MyBall ball2 = new MyBall();
+		ball2.showBangou();
+
+
+	}
+
+}

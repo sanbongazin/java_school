@@ -1,0 +1,15 @@
+
+public class MyBall {
+	public static int kosuu = 0;
+	private int bangou;
+	
+	public MyBall() {
+		kosuu++;
+		bangou = kosuu;		
+	}
+	
+	public void showBangou() {
+		System.out.println("Ball #"+ bangou);
+	}
+
+}
