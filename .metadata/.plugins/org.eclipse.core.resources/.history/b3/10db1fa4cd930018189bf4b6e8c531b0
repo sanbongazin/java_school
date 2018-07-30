@@ -1,0 +1,22 @@
+package gui;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import javax.imageio.ImageIO;;
+
+
+public class convertArray {
+	public void RunConvert() throws IOException{
+		String imagePath = "E:\\homework\\color\\Lenna.bmp";
+		BufferedImage image = ImageIO.read(new File(imagePath));
+
+		int width = image.getWidth();
+		int height = image.getHeight();
+
+		int [] rgbArray = new int [width*height];
+		image.getRGB(0, 0, width, height, rgbArray, 0, width);
+		BufferedImage outputImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		outputImage.setRGB(0, 0, width,height,rgbArray,0,width);
+	}
+
+
+}

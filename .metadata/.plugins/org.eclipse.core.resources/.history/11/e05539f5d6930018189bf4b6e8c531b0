@@ -1,0 +1,55 @@
+package gui;
+
+import java.awt.image.BufferedImage;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
+import javax.imageio.ImageIO;;
+public class GUIManager extends AbstractGUIManager{
+
+	public void noEditSample() {
+		BufferedImage image = sourceImages[0];
+		editedImage = image.getSubimage(0, 0, image.getWidth(), image.getHeight());
+		}
+	@Override
+	public void editKaiten(int rot){
+		// TODO 自動生成されたメソッド・スタブ
+		BufferedImage image = sourceImages[0];
+		convertArray conArray = new convertArray("E:\\homework\\color\\Lenna.bmp");
+		try {
+			int [] rgbArray = conArray.RunConvert();
+			int [] editedArray = new int[rgbArray.length];
+
+			if(rot % 4 == 0) {
+				editedImage = image.getSubimage(0, 0, image.getWidth(), image.getHeight());
+			}else if (rot % 3 == 0) {
+				for (int i=1 ; i<rgbArray.length+1;i++) {
+					for(int s = 1;s<image.getHeight()+1;s++) {
+					editedArray[i] = rgbArray[(image.getWidth()-i)*(s)];
+					}
+					OutputStream output = new FileOutputStream("E:\\homework\\outImage.png");
+					ImageIO.write(image,"PNG",output);
+				}
+			}
+		} catch (IOException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+
+
+	}
+
+	@Override
+	public void editSyukusyo() {
+		// TODO 自動生成されたメソッド・スタブ
+
+	}
+
+	@Override
+	public void editHanten(boolean reverseV, boolean reverseH) {
+		// TODO 自動生成されたメソッド・スタブ
+
+	}
+
+}
