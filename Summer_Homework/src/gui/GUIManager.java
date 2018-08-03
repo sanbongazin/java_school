@@ -1,14 +1,10 @@
 package gui;
 
-import java.awt.List;
-import java.awt.font.ImageGraphicAttribute;
 import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
+
 
 import javax.imageio.ImageIO;;
 public class GUIManager extends AbstractGUIManager{
@@ -30,53 +26,41 @@ public class GUIManager extends AbstractGUIManager{
 			if(rot % 4 == 0) {
 				editedImage = image.getSubimage(0, 0, image.getWidth(), image.getHeight());
 			}else if(rot % 3 == 0) {
-				int w = 0;
-					for (int x = 0; x < image.getWidth();x++) {
-						for(int y = image.getHeight() -1 ; y > 0 ;y--) {
-							editedArray[w] = rgbArray[x+y*image.getWidth()];
-							w++;
+
+					int w = 0;
+					int x = 0;
+					int y = 0;
+						for (x = image.getWidth() -1 ; x > 0 ;x--) {
+							for(y = 0; y < image.getHeight();y++) {
+								editedArray[w] = rgbArray[x+y*image.getWidth()];
+								w++;
+							}
 						}
-					}
-					int [] rev_editedArray = conArray.reverse(editedArray);
 					BufferedImage outputImage = new BufferedImage(image.getWidth(),image.getHeight(),BufferedImage.TYPE_INT_RGB);
-					outputImage.setRGB(0, 0, image.getWidth(), image.getHeight(), rev_editedArray, 0, image.getHeight());
+					outputImage.setRGB(0, 0, image.getHeight(),image.getWidth(), editedArray, 0, image.getHeight());
 					editedImage = outputImage;
 					OutputStream output = new FileOutputStream("E:\\homework\\outImage.png");
 					ImageIO.write(outputImage,"PNG",output);
 			}
 			else if (rot % 2 == 0) {
-				int w = 0;
-				int x = 0;
-				int y = 0;
-					for (y = image.getHeight()-1; y > 0;y--) {
-						for(x = 0; x < image.getWidth();x++) {
-							editedArray[w] = rgbArray[x+y*image.getWidth()];
-							w++;
-						}
-					}
 
-					BufferedImage outputImage = new BufferedImage(image.getWidth(),image.getHeight(),BufferedImage.TYPE_INT_RGB);
-					outputImage.setRGB(0, 0, image.getWidth(), image.getHeight(), editedArray, 0, image.getHeight());
-					editedImage = outputImage;
-					OutputStream output = new FileOutputStream("E:\\homework\\outImage.png");
-					ImageIO.write(outputImage,"PNG",output);
-				}else if (rot == 1) {
-					int w = 0;
-					int x = 0;
-					int y = 0;
-						for (x = 0 ; x<image.getWidth();x++) {
-							for(y = 0;y<image.getHeight();y++) {
-								editedArray[w] = rgbArray[x+y*image.getWidth()];
-								w++;
-							}
+				int [] result_array = convertArray.rot_2(editedArray, image, rgbArray);
 
+				BufferedImage outputImage = new BufferedImage(image.getWidth(),image.getHeight(),BufferedImage.TYPE_INT_RGB);
+				outputImage.setRGB(0, 0, image.getWidth(), image.getHeight(), result_array, 0, image.getHeight());
+				editedImage = outputImage;
+				OutputStream output = new FileOutputStream("E:\\homework\\outImage.png");
+				ImageIO.write(outputImage,"PNG",output);
+
+			}else if (rot == 1) {
+						int [] rot1_editedArray = convertArray.rot_1(editedArray, image, rgbArray);
 						BufferedImage outputImage = new BufferedImage(image.getWidth(),image.getHeight(),BufferedImage.TYPE_INT_RGB);
-						outputImage.setRGB(0, 0, image.getWidth(), image.getHeight(), editedArray, 0, image.getHeight());
+						outputImage.setRGB(0, 0, image.getWidth(), image.getHeight(), rot1_editedArray, 0, image.getHeight());
 						editedImage = outputImage;
 						OutputStream output = new FileOutputStream("E:\\homework\\outImage.png");
 						ImageIO.write(outputImage,"PNG",output);
 				}
-			}
+
 		} catch (IOException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
@@ -94,6 +78,38 @@ public class GUIManager extends AbstractGUIManager{
 	@Override
 	public void editHanten(boolean reverseV, boolean reverseH) {
 		// TODO 自動生成されたメソッド・スタブ
+
+		int[] rgbArray;
+
+		try {
+			convertArray conArray = new convertArray("E:\\homework\\color\\Lenna.bmp");
+			rgbArray = conArray.RunConvert();
+			int [] editedArray = new int[rgbArray.length];
+
+			BufferedImage image = sourceImages[0];
+
+			if(reverseV == true && reverseH) {
+				editedImage = image.getSubimage(0, 0, image.getWidth(), image.getHeight());
+			}else if(reverseV == true && reverseH == true) {
+				editedArray = convertArray.rev11(rgbArray, image);
+				BufferedImage outputImage = new BufferedImage(image.getWidth(),image.getHeight(),BufferedImage.TYPE_INT_RGB);
+				outputImage.setRGB(0, 0, image.getWidth(), image.getHeight(), editedArray, 0, image.getHeight());
+				editedImage = outputImage;
+				OutputStream output = new FileOutputStream("E:\\homework\\outImage.png");
+				ImageIO.write(outputImage,"PNG",output);
+			}else if(reverseV == false && reverseH == true) {
+				editedArray = convertArray.rev01(editedArray,rgbArray, image);
+				BufferedImage outputImage = new BufferedImage(image.getWidth(),image.getHeight(),BufferedImage.TYPE_INT_RGB);
+				outputImage.setRGB(0, 0, image.getWidth(), image.getHeight(), editedArray, 0, image.getHeight());
+				editedImage = outputImage;
+				OutputStream output = new FileOutputStream("E:\\homework\\outImage.png");
+				ImageIO.write(outputImage,"PNG",output);
+				}
+
+			} catch (IOException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
 
 	}
 
